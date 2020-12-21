@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
- 
-<head>
-	<div th:replace="/fragments/headlinks :: head-styles" ></div>
+
+<head th:include="fragments/head">
     <title id="title">Feed</title>
-    
-    
-    
 </head>
 <body>
-	
+	<div class="container">
 		<div th:replace="fragments/navbar"></div>
-		<div class="container">
 		<h2>Tweets containing #<span th:text="${tag}"></span></h2>
 		<div class="list-group" th:each="tweet:${tweetList}">
   			<div class="list-group-item list-group-item-action">
     			<div class="d-flex w-100 justify-content-between">
-      				<a class="username" th:href="@{/users/} + ${tweet.user.username}">@<span th:text="${tweet.user.username}"></span></a><small> <span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></small>
+      				<a class="username" th:href="@{/users/} + ${tweet.user.username}"><h5>@<span th:text="${tweet.user.username}"></span></a>
+      				<small th:text="${tweet.date}"></small></h5>
     			</div>
     			<p class="mb-1" th:utext="${tweet.message}"></p>
     		</div>
